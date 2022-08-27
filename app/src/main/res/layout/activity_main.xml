@@ -2,35 +2,34 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_container_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/songs_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/songs_text"
-        android:textColor="@color/black"
-        android:text="SONGS"
-        android:textSize="20dp"
-        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
         android:padding="10dp"
-        android:layout_centerHorizontal="true"/>
+        android:text="SONGS"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/no_songs_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/no_songs_text"
-        android:text="NO SONGS FOUND"
         android:layout_centerInParent="true"
-        android:visibility="gone"/>
+        android:text="NO SONGS FOUND"
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/recycler_view"
-        android:layout_below="@id/songs_text"/>
+        android:layout_below="@id/songs_text" />
 
     <ImageView
         android:id="@+id/btnPurchase"
@@ -44,4 +43,11 @@
         android:layout_marginBottom="20dp"
         android:src="@drawable/ic_purchase" />
 
+    <RelativeLayout
+        android:id="@+id/fragment_container_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

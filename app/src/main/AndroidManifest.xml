@@ -3,6 +3,7 @@
     package="com.example.easytutomusicapp">
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_2"
         android:label="@string/app_name"

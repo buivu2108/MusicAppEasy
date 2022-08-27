@@ -2,9 +2,11 @@ package com.example.easytutomusicapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -91,7 +93,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
         titleTv.setText(currentSong.getTitle());
 
-        totalTimeTv.setText(convertToMMSS(currentSong.getDuration()));
+        totalTimeTv.setText(currentSong.getDuration());
 
         pausePlay.setOnClickListener(v-> pausePlay());
         nextBtn.setOnClickListener(v-> playNextSong());
@@ -104,19 +106,11 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
 
     private void playMusic(){
-
         mediaPlayer.reset();
-        try {
-            mediaPlayer.setDataSource(currentSong.getPath());
-            mediaPlayer.prepare();
-            mediaPlayer.start();
-            seekBar.setProgress(0);
-            seekBar.setMax(mediaPlayer.getDuration());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
+        mediaPlayer = MediaPlayer.create(this, currentSong.getPath());
+        mediaPlayer.start();
+        seekBar.setProgress(0);
+        seekBar.setMax(mediaPlayer.getDuration());
     }
 
     private void playNextSong(){
@@ -142,6 +136,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
             mediaPlayer.pause();
         else
             mediaPlayer.start();
+
     }
 
 
@@ -150,5 +145,11 @@ public class MusicPlayerActivity extends AppCompatActivity {
         return String.format("%02d:%02d",
                 TimeUnit.MILLISECONDS.toMinutes(millis) % TimeUnit.HOURS.toMinutes(1),
                 TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mediaPlayer.reset();
     }
 }

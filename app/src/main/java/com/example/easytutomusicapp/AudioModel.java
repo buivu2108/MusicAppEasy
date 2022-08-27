@@ -3,21 +3,21 @@ package com.example.easytutomusicapp;
 import java.io.Serializable;
 
 public class AudioModel implements Serializable {
-    String path;
+    int path;
     String title;
     String duration;
 
-    public AudioModel(String path, String title, String duration) {
+    public AudioModel(int path, String title, String duration) {
         this.path = path;
         this.title = title;
         this.duration = duration;
     }
 
-    public String getPath() {
+    public int getPath() {
         return path;
     }
 
-    public void setPath(String path) {
+    public void setPath(int path) {
         this.path = path;
     }
 

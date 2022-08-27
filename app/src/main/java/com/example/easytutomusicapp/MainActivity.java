@@ -36,14 +36,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         noMusicTextView = findViewById(R.id.no_songs_text);
         btnPurchaser = findViewById(R.id.btnPurchase);
-        if(checkPermission() == false){
-            requestPermission();
-            return;
-        }
-        AudioModel dataListMusicItem1 = new AudioModel("R.raw.one","Chris Later & Dany Yeager - There's Nobody Else","02:41");
-        AudioModel dataListMusicItem2 = new AudioModel("R.raw.two","Andromedik & Used - Take Me","03:13");
-        AudioModel dataListMusicItem3 = new AudioModel("R.raw.three","Egzod, Maestro Chives & Alaina Cross - No Rival","03:18");
-        AudioModel dataListMusicItem4 = new AudioModel("R.raw.forr","NIVIRO - The Edge (feat. Harley Bird)","03:22");
+        AudioModel dataListMusicItem1 = new AudioModel(R.raw.one,"Chris Later & Dany Yeager - There's Nobody Else","02:41");
+        AudioModel dataListMusicItem2 = new AudioModel(R.raw.two,"Andromedik & Used - Take Me","03:13");
+        AudioModel dataListMusicItem3 = new AudioModel(R.raw.three,"Egzod, Maestro Chives & Alaina Cross - No Rival","03:18");
+        AudioModel dataListMusicItem4 = new AudioModel(R.raw.forr,"NIVIRO - The Edge (feat. Harley Bird)","03:22");
         songsList.add(dataListMusicItem1);
         songsList.add(dataListMusicItem2);
         songsList.add(dataListMusicItem3);
@@ -62,30 +58,13 @@ public class MainActivity extends AppCompatActivity {
            public void onClick(View view) {
                getSupportFragmentManager().beginTransaction()
                        .setReorderingAllowed(true)
-                       .add(R.id.fragment_container_view, PurchaseFragment.class, null)
-                       .addToBackStack("PurchaseFragment")
+                       .add(R.id.fragment_container_view, new PurchaseFragment(),null)
+                       .addToBackStack("purchase_fragment")
                        .commit();
            }
        });
 
     }
-
-    boolean checkPermission(){
-        int result = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        if(result == PackageManager.PERMISSION_GRANTED){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    void requestPermission(){
-        if(ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,Manifest.permission.READ_EXTERNAL_STORAGE)){
-            Toast.makeText(MainActivity.this,"READ PERMISSION IS REQUIRED,PLEASE ALLOW FROM SETTTINGS",Toast.LENGTH_SHORT).show();
-        }else
-            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},123);
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
